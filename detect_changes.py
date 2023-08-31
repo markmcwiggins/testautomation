@@ -1,7 +1,8 @@
 import subprocess
+import sqliite3
 import time
 
-REPO_PATH="git@
+REPO_PATH="git@github.com:markmcwiggins/testautomation"
 
 def check_for_git_changes(repo_path):
     while True:

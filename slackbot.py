@@ -12,7 +12,8 @@ def send_message(user_id, message):
     try:
         response = client.chat_postMessage(
             channel=user_id,
-            text=message
+            text=message,
+            username='<mark>'
         )
         if response['ok']:
             print("Message sent successfully!")
@@ -23,5 +24,5 @@ def send_message(user_id, message):
 
 if __name__ == "__main__":
     user_id = "test-automation"  # Replace with the user's Slack ID
-    message = "Hello, this is a test message!"
+    message = "user <mark> broke the build with commit sdflkjsdfl"
     send_message(user_id, message)
