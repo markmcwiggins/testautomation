@@ -1,9 +1,12 @@
+#!/usr/bin/env python3
+
 import subprocess
-import sqliite3
 import time
+import sqlite3
 
-REPO_PATH="git@github.com:markmcwiggins/testautomation"
-
+#REPO_PATH="git@github.com:markmcwiggins/testautomation"
+REPO_PATH="."
+con = sqlite3.connect('tutorial.db')
 def check_for_git_changes(repo_path):
     while True:
         try:
@@ -27,6 +30,6 @@ def check_for_git_changes(repo_path):
         time.sleep(10)  # Check every 10 seconds
 
 if __name__ == "__main__":
-    repository_path = "/path/to/your/git/repository"
+    repository_path = REPO_PATH
     check_for_git_changes.last_commit_hash = ""  # Initialize last commit hash
     check_for_git_changes(repository_path)
