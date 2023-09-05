@@ -11,16 +11,23 @@ def check_for_git_changes(repo_path):
     while True:
         try:
             # Get the hash of the latest commit
-            latest_commit_hash = subprocess.check_output(["git", "log", "-1", "--format=%H"], cwd=repo_path, text=True).strip()
-
+            proc = subprocess.run(["./gitlog.sh"], text=True, capture_output=True)
+            commitlines = proc.stdout.split('\n')
+            print(commitlines)
+            print(commitlines[0].strip().split())
+            (fromstr, hash,weekday,  mo,  day, thyme, year) = commitlines[0].strip().split()
+            (fromstr, firstname, lastname, email) = commitlines[1].strip().split()
+            commitdate = commitlines[2].strip()
+            subject = commitlines[3]. strip()
+            print(email, commitdate, subject, hash)
             # Check if the hash has changed since the last check
-            if latest_commit_hash != check_for_git_changes.last_commit_hash:
+            if hash != check_for_git_changes.last_commit_hash:
                 print("Change detected in the Git repository!")
 
                 subprocess.run(["python", "test_program.py"], cwd=repo_path)
 
                 # Update the last commit hash
-                check_for_git_changes.last_commit_hash = latest_commit_hash
+                check_for_git_changes.last_commit_hash = hash
             else:
                 print("No change detected.")
 
